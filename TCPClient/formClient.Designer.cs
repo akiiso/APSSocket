@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formClient));
             this.lblName = new System.Windows.Forms.Label();
-            this.txfName = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.txfInfo = new System.Windows.Forms.TextBox();
             this.txfMessage = new System.Windows.Forms.TextBox();
@@ -42,17 +42,9 @@
             this.lblName.Location = new System.Drawing.Point(8, 15);
             this.lblName.Name = "lblName";
             this.lblName.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblName.Size = new System.Drawing.Size(43, 15);
+            this.lblName.Size = new System.Drawing.Size(39, 15);
             this.lblName.TabIndex = 0;
-            this.lblName.Text = "Nome:";
-            // 
-            // txfName
-            // 
-            this.txfName.Location = new System.Drawing.Point(57, 12);
-            this.txfName.Name = "txfName";
-            this.txfName.PlaceholderText = "Insira seu nome";
-            this.txfName.Size = new System.Drawing.Size(257, 23);
-            this.txfName.TabIndex = 2;
+            this.lblName.Text = "Name";
             // 
             // btnConnect
             // 
@@ -101,8 +93,8 @@
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.txfMessage);
-            this.Controls.Add(this.txfName);
             this.Controls.Add(this.lblName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(418, 383);
             this.MinimizeBox = false;
@@ -118,7 +110,6 @@
         #endregion
 
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.TextBox txfName;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TextBox txfInfo;
         private System.Windows.Forms.TextBox txfMessage;

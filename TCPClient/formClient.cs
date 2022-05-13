@@ -11,21 +11,28 @@ using System.Windows.Forms;
 
 namespace TCPClient
 {
+
     public partial class formClient : Form
     {
-        public formClient()
+        string connectionAdress = "127.0.0.1:9000";
+        string buffer = "";
+        private string username;
+
+        public formClient(string username)
         {
             InitializeComponent();
+            this.username = username;
+            
         }
        
         SimpleTcpClient client;
 
-        string username = null;
-        string connectionAdress = "127.0.0.1:9000";
-        string buffer = "";
+        
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            lblName.Text = $"Bem vindo, {username}!";
             // client = new(txfIP.Text);
             client = new(connectionAdress);
             client.Events.Connected += Events_Connected;
@@ -41,7 +48,6 @@ namespace TCPClient
                 txfInfo.Text += $"[ Server ] disconnected.{Environment.NewLine}";
                 btnSend.Enabled = false;
                 btnConnect.Enabled = true;
-                txfName.ReadOnly = false;
                 client.Disconnect();
             });
         }
@@ -97,7 +103,6 @@ namespace TCPClient
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            username = txfName.Text;
             if (username.Length < 3)
             {
                 MessageBox.Show("Nome precisa ter 3 ou mais caracteres", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -109,7 +114,6 @@ namespace TCPClient
                     client.Connect();
                     btnSend.Enabled = true;
                     btnConnect.Enabled = false;
-                    txfName.ReadOnly = true;
                 }
                 catch (Exception ex)
                 {
