@@ -28,47 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblServer = new System.Windows.Forms.Label();
-            this.txfIP = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txfName = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.txfInfo = new System.Windows.Forms.TextBox();
-            this.lblMessage = new System.Windows.Forms.Label();
             this.txfMessage = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lblServer
+            // lblName
             // 
-            this.lblServer.AutoSize = true;
-            this.lblServer.Location = new System.Drawing.Point(40, 15);
-            this.lblServer.Name = "lblServer";
-            this.lblServer.Size = new System.Drawing.Size(42, 15);
-            this.lblServer.TabIndex = 0;
-            this.lblServer.Text = "Server:";
-
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(8, 15);
+            this.lblName.Name = "lblName";
+            this.lblName.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblName.Size = new System.Drawing.Size(43, 15);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Nome:";
             // 
-            // txfIP
+            // txfName
             // 
-            this.txfIP.Location = new System.Drawing.Point(88, 12);
-            this.txfIP.Name = "txfIP";
-            this.txfIP.Size = new System.Drawing.Size(305, 23);
-            this.txfIP.TabIndex = 1;
-            this.txfIP.Text = "127.0.0.1:9000";
-
+            this.txfName.Location = new System.Drawing.Point(57, 12);
+            this.txfName.Name = "txfName";
+            this.txfName.PlaceholderText = "Insira seu nome";
+            this.txfName.Size = new System.Drawing.Size(257, 23);
+            this.txfName.TabIndex = 2;
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(399, 11);
+            this.btnConnect.Location = new System.Drawing.Point(320, 11);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 23);
             this.btnConnect.TabIndex = 2;
-            this.btnConnect.Text = "Conectar";
+            this.btnConnect.Text = "Entrar";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // txfInfo
             // 
-            this.txfInfo.Location = new System.Drawing.Point(88, 41);
+            this.txfInfo.Location = new System.Drawing.Point(9, 41);
             this.txfInfo.Multiline = true;
             this.txfInfo.Name = "txfInfo";
             this.txfInfo.ReadOnly = true;
@@ -76,27 +74,17 @@
             this.txfInfo.Size = new System.Drawing.Size(386, 263);
             this.txfInfo.TabIndex = 3;
             // 
-            // lblMessage
-            // 
-            this.lblMessage.AutoSize = true;
-            this.lblMessage.Location = new System.Drawing.Point(12, 313);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(70, 15);
-            this.lblMessage.TabIndex = 0;
-            this.lblMessage.Text = "Messagem: ";
-
-            // 
             // txfMessage
             // 
-            this.txfMessage.Location = new System.Drawing.Point(88, 310);
+            this.txfMessage.Location = new System.Drawing.Point(8, 310);
             this.txfMessage.Name = "txfMessage";
-            this.txfMessage.Size = new System.Drawing.Size(305, 23);
+            this.txfMessage.PlaceholderText = "Mensagem";
+            this.txfMessage.Size = new System.Drawing.Size(306, 23);
             this.txfMessage.TabIndex = 1;
-
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(399, 310);
+            this.btnSend.Location = new System.Drawing.Point(320, 310);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 2;
@@ -104,20 +92,22 @@
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
-            // Form1
+            // formClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 344);
+            this.ClientSize = new System.Drawing.Size(402, 344);
             this.Controls.Add(this.txfInfo);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnConnect);
             this.Controls.Add(this.txfMessage);
-            this.Controls.Add(this.txfIP);
-            this.Controls.Add(this.lblMessage);
-            this.Controls.Add(this.lblServer);
+            this.Controls.Add(this.txfName);
+            this.Controls.Add(this.lblName);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(418, 383);
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.MinimumSize = new System.Drawing.Size(418, 383);
+            this.Name = "formClient";
             this.Text = "TCP/IP Client";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -127,11 +117,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblServer;
-        private System.Windows.Forms.TextBox txfIP;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox txfName;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TextBox txfInfo;
-        private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.TextBox txfMessage;
         private System.Windows.Forms.Button btnSend;
     }

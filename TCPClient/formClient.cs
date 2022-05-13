@@ -20,9 +20,14 @@ namespace TCPClient
        
         SimpleTcpClient client;
 
+        string username = null;
+        string connectionAdress = "127.0.0.1:9000";
+        string buffer = "";
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            client = new(txfIP.Text);
+            // client = new(txfIP.Text);
+            client = new(connectionAdress);
             client.Events.Connected += Events_Connected;
             client.Events.DataReceived += Events_DataReceived;
             client.Events.Disconnected += Events_Disconnected;
@@ -33,22 +38,36 @@ namespace TCPClient
         {
 
             this.Invoke((MethodInvoker)delegate {
-                txfInfo.Text += $"Server disconnected.{Environment.NewLine}";
+                txfInfo.Text += $"[ Server ] disconnected.{Environment.NewLine}";
+                btnSend.Enabled = false;
+                btnConnect.Enabled = true;
+                txfName.ReadOnly = false;
+                client.Disconnect();
             });
         }
 
         private void Events_DataReceived(object? sender, DataReceivedEventArgs e)
         {
             this.Invoke((MethodInvoker)delegate {
-                txfInfo.Text += $"Server: {Encoding.UTF8.GetString(e.Data)}{Environment.NewLine}";
+                if(buffer == "Server") 
+                { 
+                    txfInfo.Text += $"{Encoding.UTF8.GetString(e.Data)}{Environment.NewLine}"; 
+                }
+                else 
+                { 
+                txfInfo.Text += $"[ Server ]: {Encoding.UTF8.GetString(e.Data)}{Environment.NewLine}";
+                buffer = "Server";
+                }
             });
         }
 
         private void Events_Connected(object? sender, ConnectionEventArgs e)
         {
             this.Invoke((MethodInvoker)delegate {
-                txfInfo.Text += $"Server connected.{Environment.NewLine}";
+                txfInfo.Text += $"[ {username} ] connected.{Environment.NewLine}";
             });
+
+
         }
 
         private void btnSend_Click(object sender, EventArgs e)
@@ -57,25 +76,45 @@ namespace TCPClient
             {
                 if (!string.IsNullOrEmpty(txfMessage.Text))
                 {
-                    client.Send(txfMessage.Text);
-                    txfInfo.Text += $"Eu: {txfMessage.Text}{Environment.NewLine}";
-                    txfMessage.Text = String.Empty;
+                   
+                    if (buffer == "Client")
+                    {
+                        
+                        client.Send(username + ";" + txfMessage.Text);
+                        txfInfo.Text += $"{txfMessage.Text}{Environment.NewLine}";
+                        txfMessage.Text = String.Empty;
+                    }
+                    else
+                    {
+                        buffer = "Client";
+                        client.Send(username + ";"+ txfMessage.Text);
+                        txfInfo.Text += $"[ {username} ]: {txfMessage.Text}{Environment.NewLine}";
+                        txfMessage.Text = String.Empty;
+                    }
                 }
             }
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            try
+            username = txfName.Text;
+            if (username.Length < 3)
             {
-                client.Connect();
-                btnSend.Enabled = true;
-                btnConnect.Enabled = false;
-
+                MessageBox.Show("Nome precisa ter 3 ou mais caracteres", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception ex)
+            else 
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    client.Connect();
+                    btnSend.Enabled = true;
+                    btnConnect.Enabled = false;
+                    txfName.ReadOnly = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Servidor desligado", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
