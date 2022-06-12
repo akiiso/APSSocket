@@ -12,7 +12,7 @@ namespace TCPServer
             InitializeComponent();
         }
         SimpleTcpServer server;
-
+        private string Ip = "127.0.0.1:9000";
         private void btnStart_Click(object sender, EventArgs e)
         {
             server.Start();
@@ -27,7 +27,7 @@ namespace TCPServer
                 if (!string.IsNullOrEmpty(txfMessage.Text) && listClientIP.SelectedItem != null)
                 {
                     server.Send(listClientIP.SelectedItem.ToString(), txfMessage.Text);
-                    txfInfo.Text += $"Server: {txfMessage.Text}{Environment.NewLine}";
+                    txfInfo.Text += $"[ Central ]: {txfMessage.Text}{Environment.NewLine}";
                     txfMessage.Text = String.Empty;
                 }
             }
@@ -35,7 +35,7 @@ namespace TCPServer
         private void Form1_Load(object sender, EventArgs e)
         {
             btnSend.Enabled = false;
-            server = new SimpleTcpServer(txfIP.Text);
+            server = new SimpleTcpServer(Ip);
             server.Events.ClientConnected += Events_ClientConnected;
             server.Events.ClientDisconnected += Events_ClientDisconnected;
             server.Events.DataReceived += Events_DataReceived;
@@ -45,7 +45,7 @@ namespace TCPServer
         private void Events_DataReceived(object? sender, DataReceivedEventArgs e)
         {
             this.Invoke((MethodInvoker)delegate {
-                txfInfo.Text += $"{e.IpPort}: {Encoding.UTF8.GetString(e.Data)}{Environment.NewLine}";
+                txfInfo.Text += $" {e.IpPort}: {Encoding.UTF8.GetString(e.Data)}{Environment.NewLine}";
 
             });
         }
@@ -66,8 +66,5 @@ namespace TCPServer
                 listClientIP.Items.Add(e.IpPort);
             });
         }
-
-
-
     }
 }

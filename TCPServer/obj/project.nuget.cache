@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "uXXy+fViP8VGjlMPwCNVvh28yMvodtFmp1bpv9PmrbJAdo0K/9Z3QltT4cCDAfaN4XfB96sH0Ub9fQfz+dTeMQ==",
+  "success": true,
+  "projectFilePath": "D:\\Documentos\\Code\\TCPClient\\APS\\TCPServer\\TCPServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\utayk\\.nuget\\packages\\supersimpletcp\\2.6.0.8\\supersimpletcp.2.6.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
